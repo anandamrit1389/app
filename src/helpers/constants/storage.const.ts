@@ -1,0 +1,15 @@
+export const ACCESS_TOKEN_KEY = 'access_token';
+export const REFRESH_TOKEN_KEY = 'refresh_token';
+export const USER_INFO = 'user_info';
+export const COMPANY_MEMBERSHIP_INFO = 'company_membership_info';
+export const INVITE_TOKEN = 'invite_token';
+export const LAST_VISITED_ROUTE = 'lastVisitedRoute';
+export const PRESENTATION_ID_COPY = 'presentationIdCopy';
+export const REGISTRATION_ID = 'registrationId';
+export const LANDING_PROMPT_WRITE = 'landingPromptWrite';
+export const LANDING_PROMPT_SIGNUP = 'landingPromptSignup';
+export const LANDING_PROMPT_SHUFFLE = 'landingPromptShuffle';
+export const PRESENTATION_LIMIT_NOTIFICATION = 'presentation_limit_notification_shown';
+export const TRACKING_PAYLOAD = 'trackingPayload';
+export const TRACKING_CONFIG = 'trackingConsentConfig';
+export const SELECTED_PRICING_PLAN = 'selectedPricingPlan';

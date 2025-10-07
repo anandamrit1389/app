@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+  background-image: var(--lightGrey);
+  background-attachment: fixed;
+  font-family: 'Inter', sans-serif;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --radius: 0.5rem;
+    --chart-1: ;
+    --chart-2: ;
+    --chart-3: ;
+    --chart-4: ;
+    --chart-5: ;
+    --slideMaxWidth: 1920px;
+    --titleFontSize: 143px;
+    --presentationMargin: 48px;
+    --contentMarginTop: 64px;
+    --contentMarginBottom: 24px;
+    --marginBottomEndScreen: 40px;
+    --headingFontSize: 92px;
+    --smallHeadingFontSize: 59px;
+    --subheadline: 28px;
+    --smallsubheadlineSize: 24px;
+    --sectionHeadingFontSize: 44px;
+    --presentationXGap: 24px;
+    --normalTextFontSize: 24px;
+    --freeSlideFontSize: 12px;
+    --chartMargin: 70px;
+    --contentMargin: 24px;
+    --bulletPointSize: 12px;
+    --bulletPointAlign: 15px;
+    --bulletPointText: 18px;
+    --bulletPointWithTextSize: 40px;
+    --marginBetweenSlides: 5vw;
+    --imageSlideLineHeight: 470px;
+    --maxLogoSize: 64px;
+    --maxIconSize: 80px;
+    --shapeBorderSize: 50px;
+    --shapeBorderSizeSmall: 20px;
+    --bodyLg: 21px;
+    --bodySm: 14px;
+    --simpleTableX: 14px;
+    --simpleTableY: 14px;
+
+    /* Neutral */
+    --neutral-50: #f8f9fa;
+    --neutral-100: #eff0f2;
+    --neutral-200: #e5e7eb;
+    --neutral-300: #d1d5db;
+    --neutral-400: #9ca3af;
+    --neutral-500: #6b7280;
+    --neutral-600: #4b5563;
+    --neutral-700: #374151;
+    --neutral-800: #1f2937;
+    --neutral-900: #111827;
+    --neutral-950: #030712;
+
+    /* Alert */
+    --alert-500: #b12525;
+    --alert-600: #961f1f;
+    --alert-700: #7c1a1a;
+
+    /* Success */
+    --success-500: #0c9a38;
+
+    /* Primary */
+    --primary-500: #ff2a65;
+    --primary-600: #e02a5c;
+
+    /* Secondary */
+    --secondary-100: #fef5f5;
+    --secondary-200: #fff0f0;
+    --secondary-300: #ffe7e7;
+    --secondary-400: #f8d7d7;
+    --secondary-500: #f4cbcb;
+    --secondary-600: #ebc1c1;
+
+    /* Surface */
+    --surface-grey: #f8f9fa; /* surface/Grey */
+    --surface-white: #f8f9fa; /* surface/Grey */
+
+    /* Text headline */
+    --text-headline: #030712; /* text/headline/headline */
+
+    /* Text body */
+    --text-tertiary: #6b7280; /* text/body/subtle */
+    --text-secondary: #374151; /* text/normal */
+    --text-primary: #030712; /* text/body/strong */
+    --text-disabled: #9ca3af; /* text/body/disabled */
+
+    /* Icons */
+    --icon-dark: #374151;
+    --icon-light: #f8f9fa;
+
+    /* CTA */
+    --cta-text-dark: #374151;
+    --cta-text-light: #f8f9fa;
+    --cta-text-link: #ff2a65;
+
+    --cta-surface-light: #ffffff;
+    --cta-surface-light-hover: #f8f9fa;
+    --cta-surface-light-focus: #eff0f2;
+    --cta-surface-dark: #111827;
+    --cta-surface-dark-hover: #374151;
+    --cta-surface-dark-focus: #030712;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+    --chart-1: ;
+    --chart-2: ;
+    --chart-3: ;
+    --chart-4: ;
+    --chart-5: ;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(to bottom right, #f9683a, #f94a3a, #ff3d7b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.underline-svg {
+  position: relative;
+}
+
+.underline-svg::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: var(--bottom-position);
+  display: inline-block;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center bottom;
+  background-image: var(--underline-image);
+}
+
+.underline-prime {
+  --underline-image: url(assets/underline.svg);
+  --bottom-position: clamp(-10px, 2vw, -5px);
+}
+
+.underline-section {
+  --underline-image: url(assets/landing/section-sub-underline.svg);
+  --bottom-position: clamp(-11px, 1vw, -10px);
+}
+
+.color-picker .react-colorful {
+  width: auto;
+}
+
+.color-picker .react-colorful__hue {
+  margin-top: 8px;
+  height: 8px;
+  border-radius: 500px;
+}
+
+.color-picker .react-colorful__saturation {
+  border-radius: 4px;
+}
+
+.color-picker .react-colorful__pointer {
+  height: 16px;
+  width: 16px;
+}
+
+.landing-img-border {
+  border: 2px solid #0000001a;
+}
+
+::-webkit-scrollbar {
+  position: absolute;
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d6d6d7;
+  position: absolute;
+  transition: all 1s ease;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  transition: all 1s ease;
+  background: #eff0f2;
+}
+
+@media print {
+  .slide-container {
+    page-break-before: always;
+  }
+}
+
+@page {
+  size: landscape;
+}
+
+textarea {
+  field-sizing: content;
+  min-height: 1lh;
+}
+
+.sheet-content {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.sheet-content * {
+  touch-action: pan-y pinch-zoom;
+}

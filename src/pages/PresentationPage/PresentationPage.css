@@ -1,0 +1,16 @@
+.presentation-page-container {
+  display: flex;
+  background-color: #f9fbfd;
+}
+
+.preview-container {
+  display: flex;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-direction: column;
+}
+
+.editor-container {
+  height: calc(100vh - 65px);
+}

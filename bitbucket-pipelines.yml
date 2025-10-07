@@ -1,0 +1,154 @@
+image: node:22
+
+pipelines:
+  branches:
+    dev:
+      - step:
+          name: Build for Dev
+          caches:
+            - node
+          script:
+            - export ENV=dev
+            - export APP_NAME=inabit
+            - export AWS_DEFAULT_REGION=us-east-1
+            - export APP_VERSION=$(git rev-parse --short HEAD)
+
+            - apt-get update && apt-get install -y jq awscli
+            - npm install
+
+            - cp robots-dev.txt public/robots.txt
+
+            - chmod +x ./scripts/fetch_env_variables.sh
+            - ./scripts/fetch_env_variables.sh $APP_NAME $ENV $APP_VERSION
+
+            - npm run build:prod
+
+            - chmod +x scripts/generate_meta.sh
+            - ./scripts/generate_meta.sh $APP_VERSION
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to S3 for Dev
+          caches:
+            - node
+          script:
+            - export ENV=dev
+            - export APP_NAME=inabit
+            - export S3_BUCKET=inabit-ui-$ENV
+            - export AWS_DEFAULT_REGION=us-east-1
+            - apt-get update && apt-get install -y jq awscli
+
+            - export CLOUDFRONT_DISTRIBUTION_ID=$(aws ssm get-parameter --name /$APP_NAME/$ENV/distribution_id --with-decryption --query 'Parameter.Value' --output text)
+
+            - aws s3 sync dist/ s3://$S3_BUCKET --delete --exclude "index.html" --exclude "sitemaps/*" --exclude "sitemap_index.xml" --exclude "sw.js" --exclude "manifest.webmanifest" --cache-control "public, max-age=31536000, immutable" --exact-timestamps
+
+            - aws s3 cp dist/index.html s3://$S3_BUCKET/index.html --cache-control "no-cache, no-store, must-revalidate" --content-type "text/html"
+
+            - aws s3 cp dist/sw.js s3://$S3_BUCKET/sw.js --cache-control "no-cache, no-store, must-revalidate" --content-type "application/javascript"
+
+            - aws s3 cp dist/manifest.webmanifest s3://$S3_BUCKET/manifest.webmanifest --cache-control "no-cache, no-store, must-revalidate" --content-type "application/manifest+json"
+
+            - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/index.html" "/sw.js" "/manifest.webmanifest" "/meta.json"
+
+    stage:
+      - step:
+          name: Build for Stage
+          caches:
+            - node
+          script:
+            - export ENV=stage
+            - export APP_NAME=inabit
+            - export AWS_DEFAULT_REGION=us-east-1
+            - export APP_VERSION=$(git rev-parse --short HEAD)
+
+            - apt-get update && apt-get install -y jq awscli
+            - npm install
+
+            - cp robots-dev.txt public/robots.txt
+
+            - chmod +x ./scripts/fetch_env_variables.sh
+            - ./scripts/fetch_env_variables.sh $APP_NAME $ENV $APP_VERSION
+
+            - npm run build:stage
+
+            - chmod +x scripts/generate_meta.sh
+            - ./scripts/generate_meta.sh $APP_VERSION  
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to S3 for Stage
+          caches:
+            - node
+          script:
+            - export ENV=stage
+            - export APP_NAME=inabit
+            - export S3_BUCKET=inabit-ui-$ENV
+            - export AWS_DEFAULT_REGION=us-east-1
+            - apt-get update && apt-get install -y jq awscli
+
+            - export CLOUDFRONT_DISTRIBUTION_ID=$(aws ssm get-parameter --name /$APP_NAME/$ENV/distribution_id --with-decryption --query 'Parameter.Value' --output text)
+
+            - aws s3 sync dist/ s3://$S3_BUCKET --delete --exclude "index.html" --exclude "sitemaps/*" --exclude "sitemap_index.xml" --exclude "sw.js" --exclude "manifest.webmanifest" --cache-control "public, max-age=31536000, immutable" --exact-timestamps
+
+            - aws s3 cp dist/index.html s3://$S3_BUCKET/index.html --cache-control "no-cache, no-store, must-revalidate" --content-type "text/html"
+
+            - aws s3 cp dist/sw.js s3://$S3_BUCKET/sw.js --cache-control "no-cache, no-store, must-revalidate" --content-type "application/javascript"
+
+            - aws s3 cp dist/manifest.webmanifest s3://$S3_BUCKET/manifest.webmanifest --cache-control "no-cache, no-store, must-revalidate" --content-type "application/manifest+json"
+
+            - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/index.html" "/sw.js" "/manifest.webmanifest" "/meta.json"
+
+    main:
+      - step:
+          name: Build for Prod
+          caches:
+            - node
+          script:
+            - export ENV=prod
+            - export APP_NAME=inabit
+            - export AWS_DEFAULT_REGION=us-east-1
+            - export APP_VERSION=$(git rev-parse --short HEAD)
+
+            - apt-get update && apt-get install -y jq awscli
+            - npm install
+
+            - cp robots.txt public/robots.txt
+
+            - chmod +x ./scripts/fetch_env_variables.sh
+            - ./scripts/fetch_env_variables.sh $APP_NAME $ENV $APP_VERSION
+
+            - npm run build:prod
+
+            - chmod +x scripts/generate_meta.sh
+            - ./scripts/generate_meta.sh $APP_VERSION
+          artifacts:
+            - dist/**
+
+      - step:
+          name: Deploy to S3 for Prod
+          # trigger: manual
+          caches:
+            - node
+          script:
+            - export ENV=prod
+            - export APP_NAME=inabit
+            - export S3_BUCKET=inabit-ui-$ENV
+            - export AWS_DEFAULT_REGION=us-east-1
+
+            - apt-get update && apt-get install -y jq awscli
+
+            - export CLOUDFRONT_DISTRIBUTION_ID=$(aws ssm get-parameter --name /$APP_NAME/$ENV/distribution_id --with-decryption --query 'Parameter.Value' --output text)
+
+            - aws s3 sync dist/ s3://$S3_BUCKET --delete --exclude "index.html" --exclude "sitemaps/*" --exclude "sitemap_index.xml" --exclude "sw.js" --exclude "manifest.webmanifest" --cache-control "public, max-age=31536000, immutable" --exact-timestamps
+
+            - aws s3 cp dist/index.html s3://$S3_BUCKET/index.html --cache-control "no-cache, no-store, must-revalidate" --content-type "text/html"
+
+            - aws s3 cp dist/sw.js s3://$S3_BUCKET/sw.js --cache-control "no-cache, no-store, must-revalidate" --content-type "application/javascript"
+
+            - aws s3 cp dist/manifest.webmanifest s3://$S3_BUCKET/manifest.webmanifest --cache-control "no-cache, no-store, must-revalidate" --content-type "application/manifest+json"
+
+            - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/index.html" "/sw.js" "/manifest.webmanifest" "/meta.json"
+
+definitions:
+  caches:
+    node: ~/.npm

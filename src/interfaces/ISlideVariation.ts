@@ -1,0 +1,34 @@
+export interface ISlideVariation {
+  type: string;
+  showOrderNumber?: boolean;
+  verticalLayout?: boolean;
+  containerClassName?: string;
+  textContainerClassName?: string;
+  plainTextClassName?: string;
+  slideHeadingClassName?: string;
+  subtitleClassName?: string;
+  imageCaptionHeadingClassName?: string;
+  imageCaptionClassName?: string;
+  imageClassName?: string;
+  imageContainerClassName?: string;
+  chartClassName?: string;
+  chartContainerClassName?: string;
+  contentSubtitleClassName?: string;
+  bulletPointClassName?: string;
+  pageContainerClassName?: string;
+  layoutContainerClassName?: string;
+  subTextContainerClassName?: string;
+  subTextClassName?: string;
+  statsContainerClassName?: string;
+  statsClassName?: string;
+  statsTitleClassName?: string;
+  statsSectionClassName?: string;
+  statsTextClassName?: string;
+  statsValueClassName?: string;
+  statsNameClassName?: string;
+  tableClassName?: string;
+  tableHeaderClassName?: string;
+  tableCellClassName?: string;
+  tableRowClassName?: string;
+  titleDecoration?: string;
+}

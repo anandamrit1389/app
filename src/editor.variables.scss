@@ -1,0 +1,276 @@
+/**
+ * Converts a vw unit to pixels based on the 1920px base width
+ * @param {number} $vw - Value in vw units
+ * @return {number} - Value in pixels
+ */
+@function vw-to-px($vw) {
+  @return calc(($vw * 1920) / 100);
+}
+
+/**
+ * Smart scaling function that maintains readability across different screen sizes
+ * @param {number} $value - Original value to scale (in vw or px)
+ * @param {number} $divide-by - Division factor (default: 1)
+ * @param {number} $min-px - Minimum allowed value in pixels
+ * @param {number} $max-px - Maximum allowed value in pixels
+ * @return {number} - Scaled value with the same unit as input
+ */
+@function smart-scale($value, $divide-by: 1, $min-px: null, $max-px: null) {
+  $scaled-value: $value * $template-selector-scale-factor;
+
+  @if $max-px {
+    $scaled-value: min($scaled-value, $max-px);
+  }
+
+  @if $min-px and $scaled-value < $min-px {
+    @return $min-px + 0px;
+  }
+
+  @if $max-px and $scaled-value > $max-px {
+    @return $max-px + 0px;
+  }
+
+  @return $scaled-value;
+}
+
+$fullscreen-slideMaxWidth: 100vw; // 1920px
+$fullscreen-titleFontSize: 7.45vw; // 143px
+$fullscreen-presentationMargin: 2.5vw; // 48px
+$fullscreen-contentMarginTop: 8.333vw; // 160px
+$fullscreen-slideHeaderHeight: 7.396vw; // 142px
+$fullscreen-contentMarginBottom: 1.25vw; // 24px
+$fullscreen-marginBottomEndScreen: 1.25vw; // 24px
+$fullscreen-headingFontSize: 4.79vw; // 92px
+$fullscreen-smallHeadingFontSize: 3.07vw; // 59px
+$fullscreen-subheadline: 1.46vw; // 28px
+$fullscreen-smallsubheadlineSize: 1.25vw; // 24px
+$fullscreen-sectionHeadingFontSize: 2.29vw; // 44px
+$fullscreen-presentationXGap: 1.25vw; // 24px
+$fullscreen-simpleTableX: 0.93vw; // 18px
+$fullscreen-simpleTableY: 0.41vw; // 8px
+$fullscreen-normalTextFontSize: 1.25vw; // 24px
+$fullscreen-freeSlideFontSize: 1.25vw; 
+$fullscreen-titleDecorationSize: 3.5vw;
+$fullscreen-contentMargin: 1.25vw; // 24px
+$fullscreen-bulletPointSize: 0.63vw; // 12px
+$fullscreen-bulletPointAlign: 0.78vw; // 15px
+$fullscreen-bulletPointText: 0.94vw; // 18px
+$fullscreen-bulletPointWithTextSize: 2.08vw; // 40px
+$fullscreen-chartMargin: 3vw; //50px
+$fullscreen-marginBetweenSlides: 15vh; // 96px
+$fullscreen-imageSLideLineHeight: 23vw; //420px;
+$fullscreen-maxLogoSize: 4vw;
+$fullscreen-maxIconSize: 4.4vw;
+$fullscreen-shapeBorder: 50px;
+$fullscreen-shapeBorderSmall: 20px;
+$fullscreen-bodyLg: 1.094vw; // 21px
+$fullscreen-bodySm: 0.78vw; // 15px
+
+$selector-slideMaxWidth: 20vw;
+$selector-scale-factor: calc($selector-slideMaxWidth / $fullscreen-slideMaxWidth);
+
+$template-selector-slideMaxWidth: 35vw;
+$template-selector-scale-factor: calc($template-selector-slideMaxWidth / $fullscreen-slideMaxWidth);
+
+$mobile-template-selector-slideMaxWidth: 40vw;
+$mobile-template-selector-scale-factor: calc(
+  $mobile-template-selector-slideMaxWidth / $fullscreen-slideMaxWidth
+);
+
+.preview {
+  --maxLogoSize: 3.84px;
+  --maxIconSize: 10px;
+  --slideMaxWidth: 105px;
+  --titleFontSize: 7.15px;
+  --presentationMargin: 2.4px;
+  --contentMarginTop: 5.6px;
+  --contentMarginBottom: 1.2px;
+  --freeSlideMargin: 0.8px;
+  --marginBottomEndScreen: 2px;
+  --headingFontSize: 4.6px;
+  --smallHeadingFontSize: 2.95px;
+  --subheadline: 1.4px;
+  --smallsubheadlineSize: 1.2px;
+  --sectionHeadingFontSize: 2.2px;
+  --presentationXGap: 1.2px;
+  --normalTextFontSize: 1.2px;
+  --simpleTableX: 0.875px;
+  --simpleTableY: 0.625px;
+  --titleDecorationSize: 4px;
+  --freeSlideFontSize: 0.8px;
+  --chartMargin: 1px;
+  --contentMargin: 1.2px;
+  --bulletPointSize: 0.6px;
+  --bulletPointAlign: 0.75px;
+  --bulletPointText: 0.9px;
+  --bulletPointWithTextSize: 2px;
+  --contentItemSpace: 2px;
+  --marginBetweenSlides: 8.1px;
+  --imageSlideLineHeight: 22.1px;
+  --shapeBorderSize: 2.5px;
+  --shapeBorderSizeSmall: 1px;
+  --bodyLg: 2.1px;
+  --bodySm: 1.5px;
+  --smallMargin: 0.5px;
+  --statsTextFontSize: 0.5px;
+}
+
+.demo-preview {
+  --maxLogoSize: 11.52px;
+  --maxIconSize: 30px;
+  --slideMaxWidth: 315px;
+  --titleFontSize: 16px;
+  --presentationMargin: 7.2px;
+  --contentMarginTop: 16.8px;
+  --contentMarginBottom: 3.6px;
+  --marginBottomEndScreen: 6px;
+  --headingFontSize: 13.8px;
+  --smallHeadingFontSize: 10px;
+  --subheadline: 5px;
+  --smallsubheadlineSize: 3.6px;
+  --sectionHeadingFontSize: 6.6px;
+  --presentationXGap: 3.6px;
+  --normalTextFontSize: 6px;
+  --titleDecorationSize: 20px;
+  --chartMargin: 3px;
+  --contentMargin: 3.6px;
+  --bulletPointSize: 1.8px;
+  --bulletPointAlign: 2.25px;
+  --bulletPointText: 2.7px;
+  --bulletPointWithTextSize: 6px;
+  --contentItemSpace: 6px;
+  --marginBetweenSlides: 24.3px;
+  --imageSlideLineHeight: 66.3px;
+  --shapeBorderSize: 7.5px;
+  --shapeBorderSizeSmall: 3px;
+  --bodyLg: 6.3px;
+  --bodySm: 4.5px;
+  --simpleTableX: 2.8px;
+  --simpleTableY: 1.25px;
+}
+
+.mobile-template-selector {
+  --slideMaxWidth: #{$mobile-template-selector-slideMaxWidth};
+  --titleFontSize: #{$fullscreen-titleFontSize * $mobile-template-selector-scale-factor};
+  --presentationMargin: #{$fullscreen-presentationMargin * $mobile-template-selector-scale-factor};
+  --contentMarginTop: #{$fullscreen-contentMarginTop * $mobile-template-selector-scale-factor};
+  --contentMarginBottom: #{$fullscreen-contentMarginBottom * $mobile-template-selector-scale-factor};
+  --slideHeaderHeight: #{$fullscreen-slideHeaderHeight * $mobile-template-selector-scale-factor};
+  --headingFontSize: #{$fullscreen-headingFontSize * $mobile-template-selector-scale-factor};
+  --smallHeadingFontSize: #{$fullscreen-smallHeadingFontSize *
+    $mobile-template-selector-scale-factor};
+  --subheadline: #{$fullscreen-subheadline * $mobile-template-selector-scale-factor};
+  --smallsubheadlineSize: #{$fullscreen-smallsubheadlineSize *
+    $mobile-template-selector-scale-factor};
+  --sectionHeadingFontSize: #{$fullscreen-sectionHeadingFontSize *
+    $mobile-template-selector-scale-factor};
+  --presentationXGap: #{$fullscreen-presentationXGap * $mobile-template-selector-scale-factor};
+  --normalTextFontSize: #{$fullscreen-normalTextFontSize * $mobile-template-selector-scale-factor};
+  --chartMargin: #{$fullscreen-chartMargin * $mobile-template-selector-scale-factor};
+  --contentMargin: #{$fullscreen-contentMargin * $mobile-template-selector-scale-factor};
+  --bulletPointSize: #{$fullscreen-bulletPointSize * $mobile-template-selector-scale-factor};
+  --bulletPointAlign: #{$fullscreen-bulletPointAlign * $mobile-template-selector-scale-factor};
+  --bulletPointText: #{$fullscreen-bulletPointText * $mobile-template-selector-scale-factor};
+  --bulletPointWithTextSize: #{$fullscreen-bulletPointWithTextSize *
+    $mobile-template-selector-scale-factor};
+  --marginBetweenSlides: #{$fullscreen-marginBetweenSlides * $mobile-template-selector-scale-factor};
+  --imageSlideLineHeight: #{$fullscreen-imageSLideLineHeight *
+    $mobile-template-selector-scale-factor};
+  --shapeBorderSize: #{$fullscreen-shapeBorder * $mobile-template-selector-scale-factor};
+  --shapeBorderSizeSmall: #{$fullscreen-shapeBorderSmall * $mobile-template-selector-scale-factor};
+  --bodyLg: #{$fullscreen-bodyLg * $mobile-template-selector-scale-factor};
+  --bodySm: #{$fullscreen-bodySm * $mobile-template-selector-scale-factor};
+  --simpleTableX: #{$fullscreen-simpleTableX * $mobile-template-selector-scale-factor};
+  --simpleTableY: #{$fullscreen-simpleTableY * $mobile-template-selector-scale-factor};
+}
+
+.template-selector {
+  --slideMaxWidth: #{$template-selector-slideMaxWidth};
+  --titleFontSize: #{smart-scale($fullscreen-titleFontSize, 2, 14, 42)};
+  --presentationMargin: #{smart-scale($fullscreen-presentationMargin, 2, 10, 48)};
+  --contentMarginTop: #{smart-scale($fullscreen-contentMarginTop, 4, 14, 160)};
+  --contentMarginBottom: #{smart-scale($fullscreen-contentMarginBottom, 1, 12, 24)};
+  --headingFontSize: #{smart-scale($fullscreen-headingFontSize, 2, 16, 64)};
+  --smallHeadingFontSize: #{smart-scale($fullscreen-smallHeadingFontSize, 2, 10, 48)};
+  --subheadline: #{smart-scale($fullscreen-subheadline, 2, 4.5, 28)};
+  --smallsubheadlineSize: #{smart-scale($fullscreen-smallsubheadlineSize, 2, 6, 24)};
+  --sectionHeadingFontSize: #{smart-scale($fullscreen-sectionHeadingFontSize, 2, 8, 44)};
+  --presentationXGap: #{smart-scale($fullscreen-presentationXGap, 2, 12, 24)};
+  --normalTextFontSize: #{smart-scale($fullscreen-normalTextFontSize, 2, 5, 24)};
+  --chartMargin: #{smart-scale($fullscreen-chartMargin, 2, 16, 50)};
+  --contentMargin: #{smart-scale($fullscreen-contentMargin, 2, 6, 24)};
+  --bulletPointSize: #{smart-scale($fullscreen-bulletPointSize, 2, 4, 12)};
+  --bulletPointAlign: #{smart-scale($fullscreen-bulletPointAlign, 2, 6, 15)};
+  --bulletPointText: #{smart-scale($fullscreen-bulletPointText, 2, 4, 12)};
+  --bulletPointWithTextSize: #{smart-scale($fullscreen-bulletPointWithTextSize, 2, 8, 40)};
+  --marginBetweenSlides: #{smart-scale($fullscreen-marginBetweenSlides, 2, 40, 96)};
+  --imageSlideLineHeight: 'inherit';
+  --shapeBorderSize: #{smart-scale($fullscreen-shapeBorder, 2, 25, 50)};
+  --shapeBorderSizeSmall: #{smart-scale($fullscreen-shapeBorderSmall, 2, 10, 20)};
+  --bodyLg: #{smart-scale($fullscreen-bodyLg, 2, 14, 21)};
+  --maxIconSize: #{smart-scale($fullscreen-maxIconSize, 2, 40, 80)};
+  --bodySm: #{smart-scale($fullscreen-bodySm, 2, 14, 21)};
+  --simpleTableX: #{smart-scale($fullscreen-simpleTableX, 2, 14, 21)};
+  --simpleTableY: #{smart-scale($fullscreen-simpleTableY, 2, 14, 21)};
+}
+
+.template-selector-preview {
+  --slideMaxWidth: #{$template-selector-slideMaxWidth};
+  --titleFontSize: #{smart-scale($fullscreen-titleFontSize, 2, 24, 42)};
+  --presentationMargin: #{smart-scale($fullscreen-presentationMargin, 2, 14, 48)};
+  --contentMarginTop: #{smart-scale($fullscreen-contentMarginTop, 4, 18, 160)};
+  --contentMarginBottom: #{smart-scale($fullscreen-contentMarginBottom, 1, 18, 24)};
+  --headingFontSize: #{smart-scale($fullscreen-headingFontSize, 2, 20, 64)};
+  --smallHeadingFontSize: #{smart-scale($fullscreen-smallHeadingFontSize, 2, 16, 48)};
+  --subheadline: #{smart-scale($fullscreen-subheadline, 2, 10, 28)};
+  --smallsubheadlineSize: #{smart-scale($fullscreen-smallsubheadlineSize, 2, 10, 24)};
+  --sectionHeadingFontSize: #{smart-scale($fullscreen-sectionHeadingFontSize, 2, 12, 44)};
+  --presentationXGap: #{smart-scale($fullscreen-presentationXGap, 2, 12, 24)};
+  --normalTextFontSize: #{smart-scale($fullscreen-normalTextFontSize, 2, 8, 24)};
+  --chartMargin: #{smart-scale($fullscreen-chartMargin, 2, 18, 50)};
+  --contentMargin: #{smart-scale($fullscreen-contentMargin, 2, 6, 24)};
+  --bulletPointSize: #{smart-scale($fullscreen-bulletPointSize, 2, 4, 12)};
+  --bulletPointAlign: #{smart-scale($fullscreen-bulletPointAlign, 2, 6, 15)};
+  --bulletPointText: #{smart-scale($fullscreen-bulletPointText, 2, 8, 12)};
+  --bulletPointWithTextSize: #{smart-scale($fullscreen-bulletPointWithTextSize, 2, 14, 40)};
+  --marginBetweenSlides: #{smart-scale($fullscreen-marginBetweenSlides, 2, 40, 96)};
+  --imageSlideLineHeight: 'inherit';
+  --shapeBorderSize: #{smart-scale($fullscreen-shapeBorder, 2, 25, 50)};
+  --shapeBorderSizeSmall: #{smart-scale($fullscreen-shapeBorderSmall, 2, 10, 20)};
+  --bodyLg: #{smart-scale($fullscreen-bodyLg, 2, 14, 21)};
+  --maxIconSize: #{smart-scale($fullscreen-maxIconSize, 2, 40, 80)};
+  --bodySm: #{smart-scale($fullscreen-bodySm, 2, 14, 21)};
+  --simpleTableX: #{smart-scale($fullscreen-simpleTableX, 2, 14, 21)};
+  --simpleTableY: #{smart-scale($fullscreen-simpleTableY, 2, 14, 21)};
+}
+
+.selector {
+  --slideMaxWidth: #{$selector-slideMaxWidth};
+  --titleFontSize: #{$fullscreen-titleFontSize * $selector-scale-factor};
+  --presentationMargin: #{$fullscreen-presentationMargin * $selector-scale-factor};
+  --contentMarginTop: #{$fullscreen-contentMarginTop * $selector-scale-factor};
+  --contentMarginBottom: #{$fullscreen-contentMarginBottom * $selector-scale-factor};
+  --headingFontSize: #{$fullscreen-headingFontSize * $selector-scale-factor};
+  --smallHeadingFontSize: #{$fullscreen-smallHeadingFontSize * $selector-scale-factor};
+  --subheadline: #{$fullscreen-subheadline * $selector-scale-factor};
+  --smallsubheadlineSize: #{$fullscreen-smallsubheadlineSize * $selector-scale-factor};
+  --sectionHeadingFontSize: #{$fullscreen-sectionHeadingFontSize * $selector-scale-factor};
+  --presentationXGap: #{$fullscreen-presentationXGap * $selector-scale-factor};
+  --normalTextFontSize: #{$fullscreen-normalTextFontSize * $selector-scale-factor};
+  --freeSlideFontSize: #{$fullscreen-freeSlideFontSize * $selector-scale-factor};
+  --titleDecorationSize: #{$fullscreen-titleDecorationSize * $selector-scale-factor};
+  --simpleTableX: #{$fullscreen-simpleTableX * $selector-scale-factor};
+  --simpleTableY: #{$fullscreen-simpleTableY * $selector-scale-factor};
+  --chartMargin: #{$fullscreen-chartMargin * $selector-scale-factor};
+  --contentMargin: #{$fullscreen-contentMargin * $selector-scale-factor};
+  --bulletPointSize: #{$fullscreen-bulletPointSize * $selector-scale-factor};
+  --bulletPointAlign: #{$fullscreen-bulletPointAlign * $selector-scale-factor};
+  --bulletPointText: #{$fullscreen-bulletPointText * $selector-scale-factor};
+  --bulletPointWithTextSize: #{$fullscreen-bulletPointWithTextSize * $selector-scale-factor};
+  --marginBetweenSlides: #{$fullscreen-marginBetweenSlides * $selector-scale-factor};
+  --imageSlideLineHeight: #{$fullscreen-imageSLideLineHeight * $selector-scale-factor};
+  --shapeBorderSize: #{$fullscreen-shapeBorder * $selector-scale-factor};
+  --shapeBorderSizeSmall: #{$fullscreen-shapeBorderSmall * $selector-scale-factor};
+  --bodyLg: #{$fullscreen-bodyLg * $template-selector-scale-factor};
+  --bodySm: #{$fullscreen-bodySm * $template-selector-scale-factor};
+}

@@ -1,0 +1,1 @@
+export const VIDEO_WITH_VOICE_OVER_CREDITS_COST = 500;

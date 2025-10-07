@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install -g pnpm
+      - pnpm install
+  pre_build:
+    commands:
+      - echo VITE_API_URL=$API_URL > .env
+      - echo VITE_GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID >> .env
+      - echo VITE_APPLE_CLIENT_ID=$APPLE_CLIENT_ID >> .env
+      - echo VITE_SECRET_CONFIG_PASSWORD=$SECRET_CONFIG_PASSWORD >> .env
+      - echo VITE_FIREBASE_API_KEY=$FIREBASE_API_KEY >> .env
+      - echo VITE_FIREBASE_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN >> .env
+      - echo VITE_FIREBASE_PROJECTID=$FIREBASE_PROJECTID >> .env
+      - echo VITE_FIREBASE_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET >> .env
+      - echo VITE_FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID >> .env
+      - echo VITE_FIREBASE_APPID=$FIREBASE_APPID >> .env
+      - echo VITE_FIREBASE_MEASUREMENTID=$FIREBASE_MEASUREMENTID >> .env
+  build:
+    commands:
+      - pnpm build
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist
