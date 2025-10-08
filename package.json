@@ -4,15 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "build:prod": "tsc && vite build --mode=production",
-    "build:stage": "tsc && vite build --mode=stage",
-    "build:dev": "tsc && vite build --mode=development",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
-    "preview": "vite preview",
-    "format": "prettier --write ."
+  "dev": "vite",
+  "build": "tsc && vite build",
+  "build:prod": "tsc && vite build --mode=production",
+  "build:stage": "tsc && vite build --mode=stage",
+  "build:dev": "tsc && vite build --mode=development",
+  "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+  "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+  "start": "vite preview --host 0.0.0.0 --port ${PORT:-4173}",
+  "format": "prettier --write ."
   },
   "dependencies": {
     "@azure/msal-browser": "^4.5.1",
